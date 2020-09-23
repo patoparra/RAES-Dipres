@@ -55,6 +55,7 @@ Partial Class CargaArchivo
                 Business.Protocolo.actualizaVigenciaArchivo(idArchivo, vigencia)
             End If
             carga_combo()
+            carga_tipo_dato_oficial()
 
             If paginacionHabilitada() Then
                 Session("PaginaActual") = 1
@@ -271,6 +272,15 @@ Partial Class CargaArchivo
         GridView1.PageIndex = e.NewPageIndex
         carga_Tabla()
     End Sub
+
+    Private Sub carga_tipo_dato_oficial()
+        Dim idUsuario As Int32 = Convert.ToInt32(Session("id_usuario"))
+        select_tipo_dato_oficial.DataSource = Business.Protocolo.listarTipoDatoOficial(idUsuario)
+        select_tipo_dato_oficial.DataTextField = "tipodato"
+        select_tipo_dato_oficial.DataValueField = "id_tipodato"
+        select_tipo_dato_oficial.DataBind()
+    End Sub
+
     Private Sub carga_combo()
         Dim valorAnio As Integer = Integer.Parse(Date.Now.Date.ToString("yyyy"))
         Dim array_meses As String() = {"31 de marzo", "30 de junio", "30 de septiembre", "31 de diciembre", "Otra"}

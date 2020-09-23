@@ -270,4 +270,10 @@ Public NotInheritable Class Protocolo
         dt = Data.Comun.CGCommonDb.ExecuteSpToDataTable(conStr, "LISTAR_USUARIO_INSTITUCION", idUsuario)
         Return dt
     End Function
+
+    'Lista tipo de datos oficiales.
+    Public Shared Function listarTipoDatosOficiales(ByVal idUsuario As Int32) As DataTable
+        Dim conStr As String = Comun.CGCommonDb.GetConnectionStringByKeyConfig(Data.Comun.CGCommonDb.KEY_CONFIG_DB, True)
+        Return Data.Comun.CGCommonDb.ExecuteSpToDataTable(conStr, "LISTAR_TIPO_DATO_OFICIAL", idUsuario)
+    End Function
 End Class

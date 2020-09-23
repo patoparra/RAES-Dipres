@@ -236,13 +236,29 @@
             <h2>Carga y Publicación de Archivos</h2>
             <table style="width:100%; " border="0">
                 <tr>
-                    <td style="width:7%"><b>Fecha de Corte:</b></td>
+                    <td style="width:7%"><b>Tipo de dato oficial:</b></td>
+                    <td style="width:83%"><asp:DropDownList ID="select_tipo_dato_oficial" runat="server" AutoPostBack="true" Height="18px" Width="190px"></asp:DropDownList></td>
+                </tr>
+                <tr>
+                    <td style="width:7%"><b>Fecha de inicio:</b></td>
+                    <td style="width:83%"><select id="select_inicio" runat="server" name="D1" style="Height:18px;Width:190px;"></select></td>
+                </tr>
+                <tr>
+                    <td style="width:7%"><b>Fecha de corte:</b></td>
                     <td style="width:83%"><select id="select_mes" runat="server" name="D1" style="Height:18px;Width:190px;"></select></td>
                 </tr>
                 <tr>
                     <td style="width:7%"><b>Año:</b></td>
                     <td style="width:83%"><asp:DropDownList ID="select_periodo" runat="server" AutoPostBack="true" Height="18px" Width="190px"></asp:DropDownList></td>
-                </tr> 
+                </tr>
+                <tr>
+                    <td style="width:7%"><b>Modificación al dato oficial:</b></td>
+                    <td style="width:83%"><asp:TextBox ID="texto_modificacion" runat="server" name="D1" TextMode="MultiLine" Height="90px" Width="380px"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td><asp:CheckBox ID="chequea_sin_modificaciones" runat="server" Text="sin modificaciones" AutoPostBack="false" /></td>
+                    <td><asp:CheckBox ID="chequea_entrega_indirecta" runat="server" Text="entrega_indirecta" AutoPostBack="false" /></td>
+                </tr>
                 <tr>
                     <td colspan="2">&nbsp;</td>
                 </tr>

@@ -359,6 +359,12 @@ Public NotInheritable Class Protocolo
 
         End If
 
-            Return estado
+        Return estado
+    End Function
+
+
+    'Retorna el nombre de la institución a la que pertenece un usuario.
+    Public Shared Function listarTipoDatoOficial(ByVal idUsuario As Int32) As DataTable
+        Return Data.Protocolo.listarTipoDatosOficiales(idUsuario)
     End Function
 End Class
