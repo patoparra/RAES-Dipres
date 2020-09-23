@@ -1,0 +1,48 @@
+﻿<%--
+Default skin template. The following skins are provided as examples only.
+
+1. Named control skin. The SkinId should be uniquely defined because
+   duplicate SkinId's per control type are not allowed in the same theme.
+
+<asp:GridView runat="server" SkinId="gridviewSkin" BackColor="White" >
+   <AlternatingRowStyle BackColor="Blue" />
+</asp:GridView>
+
+2. Default skin. The SkinId is not defined. Only one default 
+   control skin per control type is allowed in the same theme.
+
+<asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
+--%>
+
+<asp:DropDownList runat="server" CssClass="dropdown"/>
+<asp:DropDownList runat="server" CssClass="dropdownGrande" SkinId="Grande"/>
+<asp:TextBox runat="server" CssClass="textBox"/>
+<asp:Button runat="server" CssClass="boton"/>
+
+<asp:DataGrid runat="server" CssClass="grid">
+    <HeaderStyle CssClass="gridHeader" />
+    <ItemStyle CssClass="gridRow" />
+    <AlternatingItemStyle CssClass="gridAltRow" />
+</asp:DataGrid>
+
+<asp:DataGrid runat="server" CssClass="grid" SkinId="gridPlana">
+    <HeaderStyle CssClass="gridHeader" />
+    <ItemStyle CssClass="gridRow" />
+</asp:DataGrid>
+
+<asp:DataGrid runat="server" CssClass="grid" SkinId="gridCabeceraGrande">
+    <HeaderStyle CssClass="gridHeader gridHeaderAlto" />
+    <ItemStyle CssClass="gridRow" />
+    <AlternatingItemStyle CssClass="gridAltRow" />
+</asp:DataGrid>
+
+<asp:DataGrid runat="server" CssClass="grid" SkinId="gridCabeceraGrandePlana">
+    <HeaderStyle CssClass="gridHeader gridHeaderAlto" />
+    <ItemStyle CssClass="gridRow" />
+</asp:DataGrid>
+
+<asp:GridView runat="server" CssClass="grid">
+    <HeaderStyle CssClass="gridHeader" />
+    <RowStyle CssClass="gridRow" />
+    <AlternatingRowStyle CssClass="gridAltRow" />
+</asp:GridView>

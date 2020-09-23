@@ -1,0 +1,245 @@
+﻿<%@ Master Language="VB" CodeFile="GeneralPrincipal.master.vb" Inherits="SSaludGeneralPrincipal" EnableTheming="false"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <meta http-equiv='X-UA-Compatible' content='IE=8' />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <ajax:ScriptManager ID="scriptManager" runat="server">
+            <Scripts>
+                <ajax:ScriptReference Path="../Client/jquery-1.8.2.min.js" />
+                <ajax:ScriptReference Path="../Client/jquery-1.10.2.js" />
+                <ajax:ScriptReference Path="../Client/jquery-ui.js" />
+                <ajax:ScriptReference Path="../Client/jquery.activity-indicator-1.0.0.min.js" /> 
+            </Scripts>
+        </ajax:ScriptManager>
+        <div>
+            <div class="main">
+                <div class="head">
+                    <div class="logo">
+                    </div>
+                    <div class="app">
+                        <div class="appInfo">
+                            <asp:HyperLink ID="hplkTitulo" runat="server"></asp:HyperLink>
+                            <asp:Label ID="lblTitulo" runat="server" Text="Traspaso Información Entidades Externa"/>
+                        </div>
+                        <div class="logout">
+                            <div>
+                                <asp:LinkButton runat="server" ID="lbCerrarSesion"  Text="Cerrar Sesión"></asp:LinkButton>                                
+                            </div>
+                            <div class="ui-silk ui-silk-lock-delete"> 
+                                &nbsp;
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="workspace">
+                    <div class="page-volver">
+                        <div id="reloj" style="float:right;text-align:right;display:none;"></div>
+                        <div style="clear:both;"></div>
+                    </div>
+                    <div class="page">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                    <div class="menu">
+                        <ajax:UpdatePanel ID="pnlMenu" runat="server" UpdateMode="Always" RenderMode="Block">
+                            <ContentTemplate>
+                                <asp:Xml ID="xmlMenu" runat="server" />
+                            </ContentTemplate>
+                        </ajax:UpdatePanel>
+                        <div class="sesion">
+                            <div class="user">
+                                <asp:Literal ID="LbTxUsuarioLogin" runat="server" />
+                            </div>
+                            <div class="profile">
+                                <asp:Literal ID="LbTxUsuarioPerfil" runat="server" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="copyright">
+                        <p>
+                            Direcci&oacute;n de Presupuestos, Ministerio de Hacienda, Teatinos 120, Santiago de Chile, Tel&eacute;fono (56-2) 2826 2500.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <asp:ContentPlaceHolder ID="popups" runat="server" />
+        <asp:LinkButton ID="lnkLoad" runat="server" Visible="true" />
+        <asp:Panel ID="pnlProcess" runat="server" Style="display: none;" CssClass="loading">
+            <div id="loadActivity">
+                <div class="text">
+                    Procesando...
+                </div>
+            </div>
+        </asp:Panel>
+        <ajax:ModalPopupExtender ID="mpeLoading" runat="server" BehaviorID="mpeLoading" TargetControlID="lnkLoad" PopupControlID="pnlProcess" BackgroundCssClass="modalPopupBackground" />
+
+        <script language="javascript" type="text/javascript">
+            var showLoading = true;
+            var pageOffset;
+
+            var timeOutMin = '<%=Session.Timeout%>';
+            var tic = "M";
+            //alert(tic + " " + timeOutMin);
+            var timeOutSeg = 60;
+            var pagina = '<%= System.IO.Path.GetFileName(Request.ServerVariables("SCRIPT_NAME")) %>';
+            var intervaloMin;
+            var intervaloSeg;
+            $("#reloj").hide();
+            clearInterval(intervaloSeg);
+            clearInterval(intervaloMin);
+            function timeOutSession() {
+                if (tic == "M") {
+                    timeOutMin--;
+                    if (timeOutMin <= 5) {
+                        if (pagina != 'MenuInterno.aspx')
+                            $("#reloj").show();
+                        if (timeOutMin == 1) {
+                            tic = "S";
+                            clearInterval(intervaloMin);
+                            intervaloSeg = setInterval(timeOutSession, 1000);
+                        }
+                        else
+                            document.getElementById('reloj').innerHTML = "Su sesión expirará en menos de " + timeOutMin + " min.";
+                    }
+                } else {
+                    timeOutSeg--;
+                    if (timeOutSeg > 0)
+                        document.getElementById('reloj').innerHTML = "Su sesión expirará en " + timeOutSeg + " seg.";
+                    else {
+                        document.getElementById('reloj').innerHTML = "Su sesión ha expirado, será redirigido."
+                        clearInterval(intervaloSeg);
+                    }
+                }
+            }
+            intervaloMin = setInterval(timeOutSession, 60000);
+
+
+
+            Sys.WebForms.PageRequestManager.getInstance().add_beginRequest(
+                function (sender, args) {
+                    if (showLoading) {
+                        var modalPopupBehavior = $find('mpeLoading');
+                        modalPopupBehavior.show();
+                    }
+                }
+            );
+
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(
+                function (sender, arg) {
+                    if (showLoading) {
+                        var modalPopupBehavior = $find('mpeLoading');
+                        modalPopupBehavior.hide();
+
+                        SetMenu();
+                    }
+
+                    if (arg.get_error() != null) {
+                        alert(arg.get_error().message);
+                        arg.set_errorHandled(true);
+                    }
+
+                    showLoading = true;
+                }
+            );
+
+            function SetMenu() {
+                $("div.homeItemBar").click(function () {
+                    var perfil = parseInt("<%=Session("Perfil")%>");
+                    //Administrador.
+                    if (perfil == 140) {
+                        window.location.href = '<%=Me.Page.ResolveClientUrl("~/General/CargaArchivo.aspx")%>';
+                    } else {
+                        //Consulta.
+                        if (perfil == 141) {
+                            window.location.href = '<%=Me.Page.ResolveClientUrl("~/General/DescargaArchivo.aspx")%>';
+                        }
+                    }
+                });
+
+                $("div.itemBar").each(function () {
+                    $(this).hover(function () {
+                        $(this).find("div.items").toggle('fast');
+                    });
+                });
+
+                $("li.item").each(function () {
+                    $(this).hover(function () {
+                        $(this).find("div.subItems").toggle();
+                    });
+
+                    if ($(this).hasClass("item")) {
+                        $(this).click(function () {
+                            var link = $(this).find("a:first-child");
+
+                            if (link.length > 0) {
+                                link.get(0).click();
+                            }
+                        });
+                    }
+                });
+
+                $("li.subItem").each(function () {
+                    $(this).click(function () {
+                        if ($(this).hasClass("subItem")) {
+                            var link = $(this).find("a:first-child");
+
+                            if (link.length > 0) {
+                                link.get(0).click();
+                            }
+                        }
+                    });
+                });
+            }
+
+
+            $(document).ready(function () {
+                try {
+                    $('#loadActivity').activity({ segments: 12, align: 'center' });
+                }
+                catch (e) {
+                    //showLoading = false;
+                }
+
+                SetMenu();
+
+                //Cambia el idioma de los textos del calendario.
+                $.datepicker.regional['es'] = {
+                    closeText: 'Aceptar',
+                    prevText: 'Previo',
+                    nextText: 'Siguiente',
+                    currentText: 'Hoy',
+                    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    monthNamesShort: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    dayNames: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+                    dayNamesShort: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'],
+                    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+                    weekHeader: '???',
+                    dateFormat: 'dd-mm-yy',
+                    firstDay: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: ''
+                };
+                $.datepicker.setDefaults($.datepicker.regional['es']);
+
+
+            });
+
+            function OpenInNewTab(url) {
+                var win = window.open(url, '_blank');
+                win.focus();
+            }
+
+        </script>
+    </form>
+</body>
+</html>

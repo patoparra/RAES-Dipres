@@ -1,0 +1,97 @@
+﻿.popup
+{
+	background: #fff;
+	border: solid 1px #696969;
+	padding: 10px;
+	max-height: 450px;
+}
+
+.pbody
+{
+	margin-top: 10px;
+	max-height: 350px;
+	float: left;
+	overflow: hidden;
+	width: 100%;
+}
+
+.pfooter
+{
+	float: left;
+	height: 32px;
+	text-align: right;
+	width: 100%;
+	overflow: auto;
+}
+
+.popup .gridFixed
+{
+	width: 100%;
+	empty-cells: show;
+	border: #5d7380 1px solid;
+	margin-right: 1px;
+	margin-bottom: 1px;
+}
+
+.popup .gridFHeader
+{
+	width: 100%;
+	height: 38px;
+	background: url(../../Images/bg_GridHead2.png) repeat-x;
+}
+
+.popup .gridFHeader TABLE
+{
+	height: 100%;
+	width: 100%;
+	border: 0 !important;
+	border-spacing: 0 !important;
+	border-collapse: collapse !important;
+	margin-bottom: -1px;
+}
+
+.popup .gridFHeader TABLE TD
+{
+	text-align: center;
+	color: #4e5041;
+	border-bottom: #7f826f 1px solid !important;
+	border-right: #7f826f 1px solid !important;
+	border-top: 0;
+	border-left: 0;
+	font-weight: bold;
+}
+
+.popup .gridFBody
+{
+	overflow: hidden;
+	overflow-y: auto;
+	max-height: 290px;
+}
+
+.popup .gridFBody TABLE
+{
+	width: 100%;
+	border: 0 !important;
+	border-spacing: 0 !important;
+	border-collapse: collapse !important;
+}
+
+.popup .gridFBody TABLE .gridRow TD
+{
+	border: 0;
+	border-bottom: solid 1px #a3a78e !important;
+	border-right: solid 1px #a3a78e !important;
+	color: #666666;
+	padding: 5px;
+}
+
+.popup .gridFBody TABLE .gridAltRow TD
+{
+	border: 0;
+	border-bottom: solid 1px #a3a78e !important;
+	border-right: solid 1px #a3a78e !important;
+	color: #666666;
+	padding: 5px;
+}
+
+

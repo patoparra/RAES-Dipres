@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menues>
+  <MenuTree Instrumento='1'>
+    <Menu Titulo='Formularios' Perfiles='140' Estados='*'>
+      <Item Titulo="Datos de Contacto" Pagina="Usuarios.aspx" Perfiles="140" Estados='*'/>      
+      <Item Titulo="Carga y Publicación de Archivos" Pagina="CargaArchivo.aspx" Perfiles="140" Estados='*'/>      
+    </Menu>
+    <Menu Titulo='Reportes' Perfiles='140' Estados='*'>
+      <Item Titulo="Log de Descarga" Pagina="LogDescarga.aspx" Perfiles="140" Estados='*'/>      
+    </Menu>
+    <Menu Titulo='Formularios' Perfiles='141' Estados='*'>
+      <Item Titulo="Datos de Contacto" Pagina="Contactos.aspx" Perfiles="141" Estados='*'/>
+      <Item Titulo="Archivos Publicados" Pagina="DescargaArchivo.aspx" Perfiles="141" Estados='*'/>      
+    </Menu>
+    <Menu Titulo='Documentación' Perfiles='140' Estados='*'>
+      <Item Titulo="Manual de Usuario" Pagina="javascript:OpenInNewTab('../Documentos/Manual_Usuario_Administrador.pdf');" Perfiles="*" Estados="*"/>
+    </Menu>
+  </MenuTree>
+  <MenuTree Instrumento='2'>
+    <Menu Titulo='Formularios' Perfiles='140' Estados='*'>
+      <Item Titulo="Datos de Contacto" Pagina="Usuarios.aspx" Perfiles="140" Estados='*'/>
+      <Item Titulo="Carga y Publicación de Archivos" Pagina="CargaArchivo.aspx" Perfiles="140" Estados='*'/>
+    </Menu>
+    <Menu Titulo='Reportes' Perfiles='140' Estados='*'>
+      <Item Titulo="Log de Descarga" Pagina="LogDescarga.aspx" Perfiles="140" Estados='*'/>
+    </Menu>
+    <Menu Titulo='Formularios' Perfiles='141' Estados='*'>
+      <Item Titulo="Datos de Contacto" Pagina="Contactos.aspx" Perfiles="141" Estados='*'/>
+      <Item Titulo="Archivos Publicados" Pagina="DescargaArchivo.aspx" Perfiles="141" Estados='*'/>
+    </Menu>
+    <Menu Titulo='Documentación' Perfiles='141' Estados='*'>
+      <Item Titulo="Manual de Usuario" Pagina="javascript:OpenInNewTab('../Documentos/Manual_Usuario_Consulta.pdf');" Perfiles="*" Estados="*"/>
+    </Menu>
+  </MenuTree>
+</Menues>

@@ -1,0 +1,275 @@
+﻿<style>
+
+    .divUsuario {
+        width:265px;
+        height:150px;
+        overflow-y:scroll;        
+        border: 1px solid #d3d3d3; 
+    }
+
+    .itemNotSelected {
+        background-color:white; 
+        color:black;
+        cursor:pointer; 
+    }
+
+    .itemSelected {
+        background-color:blue;
+        color:white;
+        cursor:pointer;
+    }
+
+</style>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var idArchivo = parseInt($("#idArchivo").val());
+        cargarDatosArchivo(idArchivo);
+        cargarUsuarios(idArchivo);
+    });
+
+    //Obtiene y setea los datos del archivo.
+    function cargarDatosArchivo(idArchivo) {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: "{'idArchivo':" + idArchivo + "}",
+            contentType: "application/json; charset=utf-8",
+            url: "CargaArchivo.aspx/buscarArchivo",
+            success: function (data, textStatus, jqXHR) {
+                var r = JSON.parse(data.d);
+                if (r.exito == 1) {
+                    $("#lblNombreArchivo").html(r.nombre);
+                    $("#lblDescripcionArchivo").html(r.descripcion);
+                }
+            }
+        });
+    }
+
+    //Obtiene la lista de usuarios disponibles y asociados.    
+    function cargarUsuarios(idArchivo) {
+        //Elimina los items de la lista de usuarios no asociados.
+        $("#ulUsuarios").empty();
+        $("#ulUsuariosSel").empty();
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: "{'idArchivo':"+idArchivo+"}",
+            contentType: "application/json; charset=utf-8",
+            url: "CargaArchivo.aspx/listarUsuariosArchivo",
+            success: function (data, textStatus, jqXHR) {
+                var usuarios = JSON.parse(data.d);
+                cargarListasUsuarios(usuarios);
+            }
+        });
+    }
+
+    //Carga la lista de usuarios disponibles y asociados.  
+    function cargarListasUsuarios(usuarios) {
+        if (usuarios.length > 0) {
+            for (var i = 0; i < usuarios.length; i++) {
+                var u = usuarios[i];
+
+                var id = "item" + u.id;
+                if (u.asociado == 1) {
+                    $("#ulUsuariosSel").append("<li id='" + id + "' value='" + u.id + "' class='itemNotSelected'>" + u.usuario + "</li>");
+                } else {
+                    $("#ulUsuarios").append("<li id='" + id + "' value='" + u.id + "' class='itemNotSelected'>" + u.usuario + "</li>");
+                }                
+                
+                $("#" + id).click(function () {
+                    clickItem(this);
+                });
+            }
+        }
+    }
+    
+    //Alterna el estilo del item de una lista entre seleccionado y no seleccionado. 
+    function clickItem(item) {
+                        
+        if ($(item).hasClass("itemNotSelected")) {            
+            
+            $(item).animate({
+                backgroundColor: "#666666"
+            }, 
+            100, "swing",
+            function () {
+                $(item).removeClass("itemNotSelected");
+                $(item).addClass("itemSelected");
+            });
+            
+        } else {
+            
+            $(item).animate({
+                backgroundColor: "white"                
+            }, 100, "swing",
+            function () {
+                $(item).removeClass("itemSelected");
+                $(item).addClass("itemNotSelected");
+            });            
+        }        
+    }
+    
+    //Traspasa los items seleccionados de una lista a otra.
+    function agregarItems(idULOri,idULDes) {
+        mostrarMsg(false);
+
+        //Obtiene los items seleccionados.
+        var items = new Array();
+        $("#" + idULOri + " .itemSelected").each(function (index, li) {
+            items.push(li);
+        });
+
+        //Si no existen items seleccionados.
+        if (items.length == 0) {
+
+            if (idULOri == "ulUsuarios") {
+                mostrarMsg(true, "Debe seleccionar a lo menos un usuario disponible.", true);
+            } else {
+                mostrarMsg(true, "Debe seleccionar a lo menos un usuario asociado.", true);
+            }
+        } else {
+
+            //Agregar los usuarios seleccionados a la lista de seleccionados.            
+            var clase = "itemNotSelected";
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+
+                var idJQ = "#item" + item.value;
+                var idLi = "item" + item.value;
+                var text = $(idJQ).html();
+
+                //Elimina el item.
+                $(idJQ).remove();
+
+                //Agrega el item a la lista Usuarios Asociados.
+                var li = "<li id='" + idLi + "' value='" + item.value + "' class='itemNotSelected'>" + text + "</li>";
+                $("#" + idULDes).append(li);
+
+                $(idJQ).click(function () {
+                    clickItem(this);
+                });                
+            }
+        }        
+    }
+       
+    //Despliega un mensaje de exito o error por pantalla.
+    function mostrarMsg(mostrar, msg, error) {
+
+        //Determina la clase del icono.
+        var clase = "ui-silk ui-silk-cancel";
+        if (!error)
+            clase = "ui-silk ui-silk-accept";
+
+        $("#divIconMsg").removeClass();
+        $("#divIconMsg").addClass(clase);
+
+        if (mostrar) {
+            $("#lblMsg").html(msg);
+            $("#divMsg").fadeIn("fast");
+        } else {
+            $("#divMsg").fadeOut("fast");
+        }
+    }
+
+    //Guarda los usuarios asociados al archivo.
+    function guardarUsuariosAsociados() {
+        mostrarMsg(false);
+        //Obtiene el id del archivo.
+        var idArchivo = parseInt($("#idArchivo").val());
+
+        //Obtiene los items seleccionados.
+        var idUsuarios = new Array();
+        $("#ulUsuariosSel > li").each(function (index, li) {
+            idUsuarios.push(li.value);
+        });
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: "{'idArchivo':" + idArchivo + ",'idUsuarios':" + JSON.stringify(idUsuarios) + "}",
+            contentType: "application/json; charset=utf-8",
+            url: "CargaArchivo.aspx/guardarUsuariosArchivo",
+            success: function (data, textStatus, jqXHR) {
+                var r = JSON.parse(data.d);
+                if (r.exito == 1) {
+                    mostrarMsg(true, r.msg, false);
+                    recargarTabla();
+                } else {
+                    mostrarMsg(true, r.msg, true);
+                }
+            }
+        });
+    }
+</script>
+  
+<table style="width:auto;height:auto">
+    <tr>
+        <td colspan="2" >
+            <h2>Asociación de Archivos</h2>                        
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b>Nombre Archivo: </b>
+        </td>
+        <td>
+            <label id="lblNombreArchivo"></label> 
+        </td>        
+    </tr>
+    <tr>
+        <td>
+            <b>Descripción Archivo: </b>
+        </td>
+        <td>
+            <label id="lblDescripcionArchivo"></label> 
+        </td>        
+    </tr>
+</table>
+<br />
+<br />
+<table style="width:100%;height:auto">    
+    <tr>
+        <td>
+            <b>Usuarios Disponibles:</b>
+        </td>
+        <td>                        
+        </td>
+        <td>          
+        </td>
+        <td>
+            <b>Usuarios Asociados:</b>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class= "divUsuario">
+                <ul id="ulUsuarios" style="list-style:none;padding:0px;margin:0px">
+                                          
+                </ul>
+            </div>
+        </td>
+        <td>
+            <img src="../Images/agregar.png" style="cursor:pointer" title="Agregar Usuario" onclick="agregarItems('ulUsuarios','ulUsuariosSel');"/>
+        </td>
+        <td>
+            <img src="../Images/quitar.png" style="cursor:pointer" title="Quitar Usuario"  onclick="agregarItems('ulUsuariosSel','ulUsuarios');"/>
+        </td>
+        <td>
+            <div id="divUsuariosSel" class="divUsuario">
+                <ul id="ulUsuariosSel" style="list-style:none;padding:0px;margin:0px">
+                                          
+                </ul>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align:left;height:30px">
+            <div id="divMsg" style="display:none;vertical-align:central">
+                <div id="divIconMsg" style="width:16px;height:16px" class="ui-silk ui-silk-cancel"/>
+                <label id="lblMsg"></label>
+            </div>
+        </td>
+    </tr>
+</table>

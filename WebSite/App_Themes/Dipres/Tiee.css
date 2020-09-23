@@ -1,0 +1,144 @@
+﻿table
+{
+    width: 100%;
+}
+
+.ui-datepicker-calendar {
+	display:none 
+}
+
+.GridPager a
+{
+    background-color: #f5f5f5;
+    color: #969696;
+    border: 1px solid #969696;
+    float: center;
+    width: 10px;
+    padding-left: 5px;
+        
+}
+.GridPager span
+{
+    background-color: #A1DCF2;
+    color: #000;
+    border: 1px solid #3AC0F2;
+    float: center;
+    width: 10px;
+    padding-left: 5px;
+}
+
+.butt{
+    border: 1px solid #ddd;
+    background-color: #f0f0f0;
+    padding: 4px 12px;
+    text-decoration: none;  
+    font-weight: normal;
+
+    -o-transition: background-color .2s ease-in; 
+    -moz-transition: background-color .2s ease-in;
+    -webkit-transition: background-color .2s ease-in; 
+    transition: background-color .2s ease-in; 
+}
+
+.butt-selected{
+    border: 1px solid #ddd;
+    background-color: #f0f0f0;
+    padding: 4px 12px;
+    text-decoration: underline;
+    font-weight: bold;   
+    -o-transition: background-color .2s ease-in; 
+    -moz-transition: background-color .2s ease-in;
+    -webkit-transition: background-color .2s ease-in; 
+    transition: background-color .2s ease-in; 
+}
+        
+.butt:hover {
+    background-color: #e5e5e5;    
+}
+
+.butt:active {
+    background-color: #ccc;
+}
+
+.oculto {
+    display:none
+}
+.ui-datepicker-calendar {
+display:none 
+}
+    
+.gridFiltro {
+height: 10px;
+padding: 20px;
+border-bottom: 1px solid #000000;
+}
+.GridPager a
+{
+background-color: #f5f5f5;
+color: #969696;
+border: 1px solid #969696;
+float: center;
+width: 10px;
+padding-left: 5px;
+        
+}
+.GridPager span
+{
+background-color: #A1DCF2;
+color: #000;
+border: 1px solid #3AC0F2;
+float: center;
+width: 10px;
+padding-left: 5px;
+}
+
+#select_mes
+{
+    width: 98px;
+}
+.auto-style1
+{
+    width: 60%;
+}
+
+.auto-style2
+{
+    width: 9%;
+}
+
+.butt{
+    border: 1px solid #ddd;
+    background-color: #f0f0f0;
+    padding: 4px 12px;
+    text-decoration: none;  
+    font-weight: normal;
+
+    -o-transition: background-color .2s ease-in; 
+    -moz-transition: background-color .2s ease-in;
+    -webkit-transition: background-color .2s ease-in; 
+    transition: background-color .2s ease-in; 
+}
+
+.butt-selected{
+    border: 1px solid #ddd;
+    background-color: #f0f0f0;
+    padding: 4px 12px;
+    text-decoration: underline;
+    font-weight: bold;   
+    -o-transition: background-color .2s ease-in; 
+    -moz-transition: background-color .2s ease-in;
+    -webkit-transition: background-color .2s ease-in; 
+    transition: background-color .2s ease-in; 
+}
+        
+.butt:hover {
+    background-color: #e5e5e5;    
+}
+
+.butt:active {
+    background-color: #ccc;
+}
+
+.oculto {
+    display:none
+}

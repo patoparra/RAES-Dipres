@@ -1,0 +1,521 @@
+﻿.control
+{
+	position: absolute;
+	top: 20px;
+	left: 0;
+	right: 30px;
+}
+
+h2
+{
+	font-family: 'Segoe UI' , Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 28px;
+	font-weight: normal;
+	color: #44525E;
+}
+
+h3
+{
+	font-family: 'Segoe UI' , Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: normal;
+	color: #44525E;
+/*	float: left;    */
+	width: 100%;
+	-webkit-margin-after: 0;
+}
+
+h4
+{
+	font-family: 'Segoe UI' , Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 17px;
+	font-weight: normal;
+	color: #44525E;
+	float: left;
+	width: 100%;
+	-webkit-margin-after: 0;
+}
+
+.seccion
+{
+	width: 99%;
+	margin-left: 10px;
+	margin-right: 30px;
+	margin-bottom: 30px;
+	float:left;
+}
+
+.seccion p
+{
+	margin-top: 15px;
+}
+
+.seccion fieldset
+{
+	vertical-align: top;
+	/*border: 0;*/
+	margin-bottom: 5px;
+}
+
+
+.seccion fieldset legend
+{
+	font-family: 'Segoe UI' , Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: normal;
+	color: #44525E;
+}
+
+.seccion fieldset ul
+{
+	list-style-image: url(../../Images/vineta1.gif);
+	font-family: 'Segoe UI' , Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	margin-top: 5px;
+}
+
+.seccion fieldset li, .seccion fieldset a, .seccion fieldset a:visited
+{
+	color: #333E42;
+	text-decoration: none;
+}
+
+.seccion fieldset a:hover
+{
+	color: #3399ff;
+	text-decoration: none;
+}
+
+.subSeccion
+{
+	position: relative;
+	float: left;
+	margin-left: 20px;
+	width: 45%;
+}
+
+.grid
+{
+	width: 100%;
+	empty-cells: show;
+	border: #5d7380 1px solid;
+}
+
+.gridHeader
+{
+	background: #000;
+	height: 38px;
+	background: url(../../Images/bg_GridHead2.png) repeat-x #e4e6da;
+	padding: 5px;
+}
+
+.gridHeaderAlto
+{
+	height: 60px !important;
+	background: url(../../Images/bg_GridHead3.png) repeat-x !important;
+}
+
+.gridHeader TD
+{
+	text-align: center;
+	color: #4e5041;
+	border-bottom: #7f826f 1px solid;
+	border-right: #7f826f 1px solid;
+	border-top: 0;
+	border-left: 0;
+	font-weight: bold;
+}
+
+.gridRow
+{
+}
+
+.gridRow .groupRow
+{
+}
+
+.gridRow .groupColumn
+{
+	border: solid 1px #a3a78e;
+	color: #666666;
+	padding: 5px;
+	font-weight: bold;
+	background: #fff !important;
+}
+
+.gridAltRow .groupColumn
+{
+	border: solid 1px #a3a78e;
+	color: #666666;
+	padding: 5px;
+	font-weight: bold;
+	background: #fff !important;
+}
+
+.gridRowRed
+{
+	background-color: #e0d3c2;
+}
+
+.gridRowRed TD
+{
+	border: solid 1px #a3a78e;
+	color: #660000;
+	padding: 5px;
+}
+
+.gridRow TD
+{
+	border: solid 1px #a3a78e;
+	color: #666666;
+	padding: 5px;
+}
+
+.gridAltRow
+{
+	background: #e8ecd0;
+}
+
+.gridAltRow TD
+{
+	border: solid 1px #a3a78e;
+	color: #666666;
+	padding: 5px;
+}
+
+.gridRow a, .gridRow a:visited, .gridAltRow a, .gridAltRow a:visited
+{
+	color: #4e5041;
+	text-decoration: none;
+}
+
+.gridRow a:hover, .gridAltRow a:hover
+{
+	color: #3399ff;
+}
+
+.gridRowRed a, .gridRowRed a:visited
+{
+	color: #660000;
+	text-decoration: none;
+}
+
+.gridRowRed a:hover
+{
+	color: #ff3300;
+}
+
+.botonera
+{
+	position: relative;
+	width: 100%;
+	text-align: right;
+	margin-top: 5px;
+}
+
+.leyendas
+{
+	font-style: italic;
+	margin-top: 5px;
+	font-size: 10pt;
+	width: 100%;
+}
+
+.PuntoNegro
+{
+	background-image: url(../../Images/PuntoNegro.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.PuntoNegroM
+{
+	background-image: url(../../Images/PuntoNegroM.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+td.PuntoNegroM
+{
+	background-image: url(../../Images/PuntoNegroM.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 20px;
+	height: 20px;
+}
+
+.Achurrado
+{
+	background-image: url(../../Images/achurado.gif);
+}
+
+td.Achurrado
+{
+	background-image: url(../../Images/achurado.gif);
+	width: 20px;
+	height: 20px;
+}
+
+td.Eximido
+{
+	background-color: #D3D3D3;
+	width: 20px;
+	height: 20px;
+}
+
+.ajax__tab_xp .ajax__tab_body
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif !important;
+	font-size: 8pt !important;
+}
+
+.BotonRojo
+{
+	position: relative;
+	background-color: #560e2b;
+	color: #FFF;
+	border: solid 1px #6d143a;
+	max-width: 180px;
+	font-size: 12px;
+	cursor: pointer;
+	margin-top: 5px;
+	margin-right: 10px;
+	padding: 10px 15px;
+	text-align: center;
+	float: right;
+}
+
+.BotonRojo:hover
+{
+	background-color: #6d283c;
+}
+
+.BotonRojo a, .BotonRojo a:visited
+{
+	color: #fff;
+	text-decoration: none;
+}
+
+.BotonNaranja
+{
+	position: relative;
+	background-color: #cd5f17;
+	color: #FFF;
+	max-width: 180px;
+	font-size: 12px;
+	cursor: pointer;
+	margin-top: 5px;
+	margin-right: 10px;
+	padding: 10px 15px;
+	text-align: center;
+	border-right: #ff6600 1px solid;
+	border-top: #ff6600 1px solid;
+	border-left: #ff6600 1px solid;
+	border-bottom: #ff6600 1px solid;
+	float: right;
+}
+
+.BotonNaranja:hover
+{
+	background-color: #f1893a;
+}
+
+.BotonNaranja a, .BotonNaranja a:visited
+{
+	color: #fff;
+	text-decoration: none;
+}
+
+.BotonVerde
+{
+	position: relative;
+	background-color: #0d3c63;
+	color: #FFF;
+	border: solid 1px #0b3449;
+	max-width: 180px;
+	font-size: 12px;
+	cursor: pointer;
+	margin-top: 5px;
+	margin-right: 10px;
+	padding: 10px 15px;
+	text-align: center;
+	float: right;
+}
+
+.BotonVerde:hover
+{
+	background-color: #255874;
+}
+
+.BotonVerde a, .BotonRojo a:visited
+{
+	color: #fff;
+	text-decoration: none;
+}
+
+
+.modalPopupBackground
+{
+	background: #000;
+	filter: alpha(opacity = 25);
+	opacity: .25;
+}
+
+.loading
+{
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	width: 150px;
+	height: 150px;
+}
+
+.loading #loadActivity
+{
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	background: #6F7786;
+}
+
+.loading .text
+{
+	position: absolute;
+	bottom: 15px;
+	height: auto;
+	text-align: center;
+	left: 0;
+	right: 0;
+}
+
+
+.dropdown
+{
+	font-size: 11px;
+	color: #323232;
+}
+
+.dropdownGrande
+{
+	font-size: 12px;
+	color: #000;
+}
+
+.textBox
+{
+	font-size: 11px;
+	color: #323232;
+}
+
+input[type="password"]
+{
+	font-size: 11px;
+	color: #323232;
+}
+
+.boton
+{
+	font-size: 11px;
+	color: #323232;
+	height: 25px;
+	margin-left: 2px;
+	margin-top: 5px;
+	margin-bottom: -10px;
+	-webkit-margin-after: 0px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.botonReportes
+{
+	position: absolute;
+	top: 1px;
+	right: 10px;
+	width: 170px;
+	height: 30px;
+}
+
+.botonReportes .botonMenu
+{
+	position: absolute;
+	padding: 5px;
+	cursor: pointer;
+}
+.botonReportes .botonMenu SPAN
+{
+	float: right;
+}
+.botonReportes .botonMenu DIV
+{
+	float: right;
+	margin-right: 5px;
+}
+
+.botonReportes .listaReportes
+{
+	position: absolute;
+	top: 100%;
+	right: 0;
+	width: 350px;
+	background: #fff;
+	border: solid 1px #000;
+	color: #000 !important;
+}
+
+.botonReportes .listaReportes ul
+{
+	list-style: none;
+	margin: 0;
+	padding: 5px;
+}
+
+.botonReportes .listaReportes ul .tipoDoc
+{
+	font-family: 'Segoe UI' , Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	color: #44525E;
+}
+
+.botonReportes .listaReportes ul .tipoDoc div
+{
+	float: left;
+	margin-right: 5px;
+}
+
+.botonReportes .listaReportes ul .tipoDoc ul
+{
+	list-style: none;
+	margin: 5px;
+	padding: 5px;
+	-webkit-padding-before: 30px;
+}
+
+.botonReportes .listaReportes ul .tipoDoc li
+{
+	font-size: 12px !important;
+	color: #000 !important;
+	padding: 5px;
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+.botonReportes .listaReportes ul .tipoDoc li:hover
+{
+	color: #fff !important;
+	background: #696969 !important;
+}
+
+.botonReportes .listaReportes ul .tipoDoc li a, .botonReportes .listaReportes ul li a:visited
+{
+	color: #000;
+	text-decoration: none;
+}
+
+.botonReportes .listaReportes ul .tipoDoc li:hover a, .botonReportes .listaReportes ul .tipoDoc li:hover a:hover
+{
+	color: #fff;
+	text-decoration: none;
+}
+
+

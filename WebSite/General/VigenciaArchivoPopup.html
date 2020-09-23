@@ -1,0 +1,201 @@
+﻿<script type="text/javascript">
+
+    $(document).ready(function () {
+        var idArchivo = parseInt($("#idArchivo").val());
+        cargarDatosArchivoVigencia(idArchivo);
+        cargarUsuariosVigencia(idArchivo);
+    });
+
+    //Obtiene y setea los datos del archivo.
+    function cargarDatosArchivoVigencia(idArchivo) {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: "{'idArchivo':" + idArchivo + "}",
+            contentType: "application/json; charset=utf-8",
+            url: "CargaArchivo.aspx/buscarArchivo",
+            success: function (data, textStatus, jqXHR) {
+                var r = JSON.parse(data.d);
+                if (r.exito == 1) {
+                    $("#lblNombreArchivoVig").html(r.nombre);
+                    $("#lblDescripcionArchivoVig").html(r.descripcion);
+                }
+            }
+        });
+    }
+
+    //Obtiene la lista de usuarios asociados.    
+    function cargarUsuariosVigencia(idArchivo) {
+                      
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: "{'idArchivo':" + idArchivo + "}",
+            contentType: "application/json; charset=utf-8",
+            url: "CargaArchivo.aspx/listarUsuariosArchivo",
+            success: function (data, textStatus, jqXHR) {
+                var usuarios = JSON.parse(data.d);
+                cargarTablaUsuarios(usuarios);
+            }
+        });
+    }
+
+    //Carga la tabla de usuarios asociados.  
+    function cargarTablaUsuarios(usuarios) {
+        //Elimina los usuarios no asociados.
+        usuarios = $.grep(usuarios, function (u) {
+            return u.asociado == 1;
+        });
+
+        //Elimina las filas de la tabla de Usuarios Asociados (si existen), excepto la cabecera.
+        $("#tbUsuarios .gridRow").remove();
+        $("#tbUsuarios .gridAltRow").remove();
+
+        if (usuarios.length > 0) {
+            for (var i = 0; i < usuarios.length; i++) {
+                var u = usuarios[i];
+                                
+                if (u.asociado == 1) {
+
+                    //Celda del nombre de usuario.
+                    var tdUsuario = "<td>" + u.usuario + "</td>";
+
+                    //Clase de la fila.
+                    var clase;
+                    if((i % 2) == 0)
+                        clase = "class='gridRow'";
+                    else
+                        clase = "class='gridAltRow'";
+
+                    //Celda de la vigencia.
+                    var checked = "";
+                    if (u.vigente == 1)
+                        checked = "checked='checked'";
+                    
+                    var tdVigente = "<td style='text-align:center'><input type='checkbox' value='" + u.id + "' " + checked + " class='cbVigente'/></td>";
+
+                    //Celda de la fecha de vigencia.
+                    var tdFechaVigencia = "<td style='text-align:center'>" + u.fecha_vigencia + "</td>";
+
+                    $("#tbUsuarios").append("<tr " + clase + ">" + tdUsuario + tdVigente + tdFechaVigencia + "</tr>");
+                }                
+            }
+        }
+    }
+
+    //Despliega un mensaje de exito o error por pantalla.
+    function mostrarMsgVigencia(mostrar, msg, error) {
+
+        //Determina la clase del icono.
+        var clase = "ui-silk ui-silk-cancel";
+        if (!error)
+            clase = "ui-silk ui-silk-accept";
+
+        $("#divIconMsgVigencia").removeClass();
+        $("#divIconMsgVigencia").addClass(clase);
+
+        if (mostrar) {
+            $("#lblMsgVigencia").html(msg);
+            $("#divMsgVigencia").fadeIn("fast");
+        } else {
+            $("#divMsgVigencia").fadeOut("fast");
+        }
+    }
+
+    //Guarda la vigencia del archivo por cada usuario.
+    function guardarArchivoVigencia() {
+        mostrarMsgVigencia(false);
+        //Obtiene el id del archivo.
+        var idArchivo = parseInt($("#idArchivo").val());
+
+        //Obtiene los checkbox.
+        var usuarios = new Array();
+        var vigencias = new Array();
+        $("#tbUsuarios .cbVigente").each(function (index, cb) {
+            usuarios.push(cb.value);
+            
+            if (cb.checked)
+                vigencias.push(1);
+            else
+                vigencias.push(0);
+        });
+               
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: "{'idArchivo':" + idArchivo + ",'usuarios':" + JSON.stringify(usuarios) + ",'vigencias':"+JSON.stringify(vigencias)+"}",
+            contentType: "application/json; charset=utf-8",
+            url: "CargaArchivo.aspx/guardarArchivoVigencia",
+            success: function (data, textStatus, jqXHR) {
+                var r = JSON.parse(data.d);
+                if (r.exito == 1) {
+                    recargarTabla();
+                    mostrarMsgVigencia(true, r.mensaje, false);                    
+                    //Recarga la tabla de usuarios.
+                    var idArchivo = parseInt($("#idArchivo").val());
+                    cargarUsuariosVigencia(idArchivo);
+                    
+                } else {
+                    mostrarMsgVigencia(true, r.mensaje, true);                   
+                }
+            }
+        });
+        return false;
+    }
+</script>
+  
+<table style="width:auto;height:auto">
+    <tr>
+        <td colspan="2" >
+            <h2>Vigencia del Archivo</h2>                        
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b>Nombre Archivo: </b>
+        </td>
+        <td>
+            <label id="lblNombreArchivoVig"></label> 
+        </td>        
+    </tr>
+    <tr>
+        <td>
+            <b>Descripción Archivo: </b>
+        </td>
+        <td>
+            <label id="lblDescripcionArchivoVig"></label> 
+        </td>        
+    </tr>
+</table>
+<br />
+
+<table style="width:100%;height:auto">    
+    <tr>
+        <td>
+            <div style="width:100%;height:200px;overflow-y:scroll;border: 1px solid #d3d3d3;" >
+                <table id="tbUsuarios" class="grid" style="border:0px" >
+                    <tr class="gridHeader">
+                        <td style="width:40%" >
+                            Nombre Usuario
+                        </td>
+                        <td style="width:20%" >
+                            Vigente
+                        </td>
+                        <td style="width:40%">
+                            Fecha Vigencia
+                        </td>                        
+                    </tr>
+                </table> 
+            </div>
+        </td>        
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align:left;height:30px">
+            <div id="divMsgVigencia" style="display:none;vertical-align:central">
+                <div id="divIconMsgVigencia" style="width:16px;height:16px" class="ui-silk ui-silk-cancel"/>
+                <label id="lblMsgVigencia"></label>
+            </div>
+        </td>
+    </tr>
+</table>
+

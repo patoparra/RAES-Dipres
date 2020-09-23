@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Menues>
+  <MenuTree Instrumento='1'>
+    <Menu Titulo="Formularios" Perfiles="*" Estados="*" Usuarios="*">
+      <Item Titulo="Formulario F Programa de Mejoramiento de la Gestión 2013" Pagina="FPMGCompromiso.aspx" Perfiles="136" Estados='*'/>
+      <Item Titulo="Formulario F Programa de Mejoramiento de la Gestión 2013" Pagina="FPMGRevisionComite.aspx" Perfiles="137" Estados='*'/>
+    </Menu>
+    <Menu Titulo='Documentación' Perfiles='*' Estados='*'>
+      <!--<Item Titulo="Manual de Usuario" Pagina="Documentacion.aspx?tipoDoc=1" Perfiles="140,141" Estados='*'/>-->
+      <Item Titulo="Manual de Usuario" Pagina="javascript:OpenInNewTab('../Documentos/Manual_Usuario_Administrador.pdf');" Perfiles="*" Estados="*"/>
+    </Menu>
+  </MenuTree>
+  <MenuTree Instrumento='2'>
+    <Menu Titulo="Formularios" Perfiles="*" Estados="*" Usuarios="*">
+      <Item Titulo="Formulario F Programa de Mejoramiento de la Gestión 2013" Pagina="FPMGCompromiso.aspx" Perfiles="136" Estados='*'/>
+      <Item Titulo="Formulario F Programa de Mejoramiento de la Gestión 2013" Pagina="FPMGRevisionComite.aspx" Perfiles="137" Estados='*'/>
+    </Menu>
+    <Menu Titulo='Documentación' Perfiles='*' Estados='*'>
+      <Item Titulo="Manual de Usuario" Pagina="javascript:OpenInNewTab('../Documentos/Manual_Usuario_Consulta.pdf');" Perfiles="*" Estados="*"/>
+    </Menu>
+  </MenuTree>  
+  
+</Menues>

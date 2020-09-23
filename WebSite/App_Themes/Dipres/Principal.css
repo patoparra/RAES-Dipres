@@ -1,0 +1,182 @@
+﻿body
+{
+	width: 90%;
+	height: 100%;
+	font-family: 'Segoe UI' , Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	overflow: hidden;
+	background: #fff;
+}
+
+
+.main
+{
+	position: absolute;
+	top: 5px;
+	left: 10px;
+	right: 10px;
+	bottom: 0;
+	min-width: 780px;   /* JCF 02/10/2013   Antes 980px */
+	min-height: 610px;
+}
+
+.logout
+{
+	position: absolute;
+	top: 2px;
+	right: 5px;
+	font-size: 13px;
+}
+
+.logout a, .logout a:visited
+{
+	color: #696969;
+	text-decoration: none;
+}
+
+.logout a:hover
+{
+	color: #0099ff;
+	text-decoration: none;
+}
+
+.logout div
+{
+	float: right;
+	margin-left: 5px;
+}
+
+.head
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 68px;
+}
+
+.app
+{
+	position: absolute;
+	left: 206px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: #fff url(../../Images/bg_header2.png) no-repeat;
+	text-align: right;
+}
+.appInfo
+{
+	position: absolute;
+	top: 25px;
+	right: 0;
+	font-size: 22px;
+	font-weight: lighter;
+	color: #ff6347;
+}
+
+.appInfo A, .appInfo A:visited, .appInfo A:hover
+{
+	color: #003300;
+	text-decoration: none;
+}
+
+.logo
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: url(../../Images/logo.gif) no-repeat;
+	width: 204px;
+	height: 68px;
+}
+
+.sesion
+{
+	position: absolute;
+	top: 2px;
+	right: 5px;
+	text-align: right;
+	font-size: 14px;
+	color: #fff;
+}
+
+.sesion .profile
+{
+	font-size: 12px;
+	color: #87cefa;
+}
+
+.workspace
+{
+	position: absolute;
+	top: 69px;
+	left: 0;
+	right: 0;
+	bottom: 40px;
+	overflow: hidden;
+}
+
+.menu
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 40px;
+	background: #696969;
+}
+
+.page-volver
+{
+	position: absolute;
+	top: 40px;
+	left: 0;
+	right: 0;
+	bottom: 2px;
+	height: 23px;
+	overflow: auto;
+	overflow-x: hidden;
+	background: #fff;
+}
+
+.page
+{
+	position: absolute;
+	top: 64px;
+	left: 0;
+	right: 0;
+	bottom: 2px;
+	overflow: auto;
+	/*overflow-x: hidden;*/ /* JCF 02/10/2013 */
+	background: #fff;
+}
+.footer
+{
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0; /*width: 990px;*/
+	height: 40px; /*margin: 0 auto;*/
+	background-color: #6887C0;
+	border: 1px solid #5974A5;
+}
+
+.footer div
+{
+	position: absolute;
+	left: 150px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	color: #fff;
+	background-color: #6F7786;
+}
+
+.footer div p
+{
+	position: absolute;
+	top: 12px;
+	left: 20px;
+	margin: 0;
+}
