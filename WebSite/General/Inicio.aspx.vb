@@ -25,18 +25,22 @@ Public Class Inicio
 #End Region
 
     Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Usuario = Request("usuario")
-        Contrasena = Request("password")
+        'Usuario = Request("usuario")
+        'Contrasena = Request("password")
+
+        'PPARRA: eliminar las líneas con session
+        'Usuario = Session("Usuario")
+        'Contrasena = Session("Clave")
 
         Session("periodo") = CType(ConfigurationManager.AppSettings("Periodo"), Integer)
         Session("Proceso") = 64
 
         If Usuario <> "" And Contrasena <> "" Then
             If ValidacionGlobal(Usuario, Contrasena, 64, Session("periodo")) = 0 Then
-                If Session("Perfil").ToString = "150" Then
+                If Session("Perfil").ToString = "141" Then
                     Response.Redirect("DescargaArchivo.aspx")
                 End If
-                If Session("Perfil").ToString = "151" Then
+                If Session("Perfil").ToString = "140" Then
                     Response.Redirect("CargaArchivo.aspx")
                 End If
             Else

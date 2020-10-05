@@ -15,6 +15,7 @@ Namespace Comun
 
     Public Class CGCommonDb
         Public Const KEY_CONFIG_DB As String = "StringConexion"
+        Public Const KEY_CONFIG_DB2 As String = "StringConexionRaes"
 
         Private Sub New()
         End Sub

@@ -257,7 +257,7 @@
                 </tr>
                 <tr>
                     <td><asp:CheckBox ID="chequea_sin_modificaciones" runat="server" Text="sin modificaciones" AutoPostBack="false" /></td>
-                    <td><asp:CheckBox ID="chequea_entrega_indirecta" runat="server" Text="entrega_indirecta" AutoPostBack="false" /></td>
+                    <td><asp:CheckBox ID="chequea_entrega_indirecta" runat="server" Text="entrega indirecta" AutoPostBack="false" /></td>
                 </tr>
                 <tr>
                     <td colspan="2">&nbsp;</td>
@@ -265,7 +265,7 @@
                 <tr style="vertical-align:bottom;">
                     <td colspan="2" style="text-align:left; height:24px">
                         <asp:FileUpload ID="FileUpload1" runat="server" onchange="return HabilitaText(this)" style="width: 590px; margin-top:0px; margin-bottom:0px; margin-left: 0px; border: #C3C5C6 1px solid; height:24px" />&nbsp;&nbsp; 
-                        <asp:Button ID="cargaArchivo"  runat="server" Text="Cargar Archivo" Width="110px" />&nbsp;&nbsp;&nbsp;&nbsp; <asp:Button id="btnPublicar" runat="server" Text="Publicar" OnClientClick="return confirmarPublicacion();" />
+                        <asp:Button ID="cargaArchivo"  runat="server" Text="Cargar Archivo" Width="110px" />&nbsp;&nbsp;&nbsp;&nbsp; <asp:Button id="btnPublicar" runat="server" Text="Enviar" OnClientClick="return confirmarPublicacion();" />
                     </td>
                 </tr>
                 <tr>

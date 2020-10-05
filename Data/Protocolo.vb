@@ -272,8 +272,20 @@ Public NotInheritable Class Protocolo
     End Function
 
     'Lista tipo de datos oficiales.
-    Public Shared Function listarTipoDatosOficiales(ByVal idUsuario As Int32) As DataTable
-        Dim conStr As String = Comun.CGCommonDb.GetConnectionStringByKeyConfig(Data.Comun.CGCommonDb.KEY_CONFIG_DB, True)
-        Return Data.Comun.CGCommonDb.ExecuteSpToDataTable(conStr, "LISTAR_TIPO_DATO_OFICIAL", idUsuario)
+    Public Shared Function listarTipoDatosOficiales(ByVal idUsuarioContacto As Int32) As DataTable
+        Dim conStr As String = Comun.CGCommonDb.GetConnectionStringByKeyConfig(Data.Comun.CGCommonDb.KEY_CONFIG_DB2, True)
+        Return Data.Comun.CGCommonDb.ExecuteSpToDataTable(conStr, "LISTAR_TIPO_DATO_OFICIAL", idUsuarioContacto)
+    End Function
+
+    'Lista fecha de incio de un tipo de datos oficial.
+    Public Shared Function listarFechasInicio(ByVal idTipoDatoOficial As Int32) As DataTable
+        Dim conStr As String = Comun.CGCommonDb.GetConnectionStringByKeyConfig(Data.Comun.CGCommonDb.KEY_CONFIG_DB2, True)
+        Return Data.Comun.CGCommonDb.ExecuteSpToDataTable(conStr, "LISTAR_FECHA_INICIO", idTipoDatoOficial)
+    End Function
+
+    'Lista fecha de incio de un tipo de datos oficial.
+    Public Shared Function listarFechasCierre(ByVal idTipoDatoOficial As Int32) As DataTable
+        Dim conStr As String = Comun.CGCommonDb.GetConnectionStringByKeyConfig(Data.Comun.CGCommonDb.KEY_CONFIG_DB2, True)
+        Return Data.Comun.CGCommonDb.ExecuteSpToDataTable(conStr, "LISTAR_FECHA_CIERRE", idTipoDatoOficial)
     End Function
 End Class

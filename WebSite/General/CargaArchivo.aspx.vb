@@ -101,6 +101,90 @@ Partial Class CargaArchivo
         Dim mb As Double = bytes / 1048576
         Return mb
     End Function
+    'Protected Sub CargaArchivo_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles cargaArchivo.Click
+    '    Dim mensajes As New List(Of String)()
+    '    mostrarMensaje(False)
+    '    If FileUpload1.HasFile Then
+    '        Try
+    '            Dim FileName As String
+    '            Dim extensiones As String = ConfigurationManager.AppSettings("ExtArchivos").ToLower()
+    '            Dim tamanio_extensiones As String = ConfigurationManager.AppSettings("TamanoExtArchivos").ToLower()
+    '            Dim array_extensiones As String()
+    '            Dim array_tam_extensiones As String()
+    '            array_extensiones = extensiones.Split(",")
+    '            array_tam_extensiones = tamanio_extensiones.Split(",")
+    '            Dim largo As Integer = array_extensiones.Length - 1
+
+    '            Dim valorCombo = select_periodo.SelectedValue
+    '            Dim valorComboMes = select_mes.Value
+    '            Dim valorMes As Integer
+
+    '            valorMes = seleccion_mes(valorComboMes)
+    '            Dim customSetting As String = encripto.Desencriptar(ConfigurationManager.AppSettings("urlUpload"))
+    '            Dim val As Double = ConvertBytesToMB(FileUpload1.FileBytes.Length)
+    '            Dim Peso As Integer = FileUpload1.FileBytes.Length
+
+    '            Dim valorInt As Integer = CInt(Int(val))
+    '            Dim strFilePath As String
+    '            Dim strFileExtension As String
+    '            strFilePath = customSetting & FileUpload1.FileName
+    '            strFileExtension = System.IO.Path.GetExtension(strFilePath)
+    '            Dim ing As Integer = 0
+    '            Dim archivo As New Archivos()
+    '            'FileName = archivo.NormalizaNombre(FileUpload1.FileName)
+    '            FileName = FileUpload1.FileName
+    '            Dim validaNombre As Integer = validaNombreArchivo(FileName)
+
+    '            If validaNombre > 0 Then
+    '                mensajes.Add("El archivo " & FileUpload1.FileName & " ya existe.")
+    '                mostrarMensaje(True, mensajes, True)
+    '            Else
+    '                For i As Integer = 0 To largo
+    '                    array_extensiones(i) = array_extensiones(i).Trim()
+    '                    array_tam_extensiones(i) = array_tam_extensiones(i).Trim()
+    '                    Dim ext As String = array_extensiones(i)
+    '                    Dim tamExt As String = array_tam_extensiones(i)
+
+    '                    If valorInt <= Integer.Parse(tamExt) And strFileExtension.ToLower() = ext.ToLower() Then
+    '                        ing = 1
+    '                        Dim thisDay As Integer = Microsoft.VisualBasic.DateAndTime.Day(Now)
+    '                        Dim mes As String
+    '                        If (valorMes.ToString().Length = 1) Then
+    '                            mes = "0" & valorMes.ToString()
+    '                        Else
+    '                            mes = valorMes.ToString()
+    '                        End If
+    '                        Dim fechaPer As String = valorCombo & "-" & mes & "-" & "01" 'thisDay.ToString()
+    '                        Convert.ToDateTime(fechaPer)
+
+    '                        Dim customSetting1 As String = encripto.Desencriptar(ConfigurationManager.AppSettings("urlUpload"))
+    '                        FileUpload1.SaveAs(customSetting1 & FileName)
+    '                        If File.Exists(customSetting1 & FileName) Then
+    '                            Business.Protocolo.InsertarArchivo(FileName, Session("Usuario"), valorCombo, valorMes, fechaPer, Peso, txtDescripcion.Value)
+    '                            mensajes.Add("El archivo " & FileUpload1.FileName & " fue cargado exitosamente.")
+    '                            mostrarMensaje(True, mensajes, False)
+    '                            carga_Tabla()
+    '                        Else
+    '                            mensajes.Add("Ha ocurrido un error al guardar el archivo " & FileUpload1.FileName & ".")
+    '                            mostrarMensaje(True, mensajes, True)
+    '                        End If
+    '                    End If
+    '                Next
+    '                If ing = 0 Then
+    '                    mensajes.Add("El archivo " & FileUpload1.FileName & " no posee un formato valido o su peso es superior al permitido.")
+    '                    mostrarMensaje(True, mensajes, True)
+    '                End If
+    '            End If
+    '        Catch ex As Exception
+    '            mensajes.Add("ERROR: " & ex.Message.ToString())
+    '            mostrarMensaje(True, mensajes, True)
+    '        End Try
+    '    Else
+    '        mensajes.Add("No has seleccionado un archivo.")
+    '        mostrarMensaje(True, mensajes, True)
+    '    End If
+    'End Sub
+
     Protected Sub CargaArchivo_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles cargaArchivo.Click
         Dim mensajes As New List(Of String)()
         mostrarMensaje(False)
@@ -130,7 +214,7 @@ Partial Class CargaArchivo
                 strFilePath = customSetting & FileUpload1.FileName
                 strFileExtension = System.IO.Path.GetExtension(strFilePath)
                 Dim ing As Integer = 0
-                Dim archivo As New Archivos()
+                'Dim archivo As New Archivos()
                 'FileName = archivo.NormalizaNombre(FileUpload1.FileName)
                 FileName = FileUpload1.FileName
                 Dim validaNombre As Integer = validaNombreArchivo(FileName)
@@ -184,7 +268,7 @@ Partial Class CargaArchivo
             mostrarMensaje(True, mensajes, True)
         End If
     End Sub
-    
+
     Public Shared Function validaNombreArchivo(ByVal nombre As String) As Integer
         Dim valor As Integer = Business.Protocolo.validaIngresoArchivo(nombre)
         Return valor
@@ -275,10 +359,22 @@ Partial Class CargaArchivo
 
     Private Sub carga_tipo_dato_oficial()
         Dim idUsuario As Int32 = Convert.ToInt32(Session("id_usuario"))
-        select_tipo_dato_oficial.DataSource = Business.Protocolo.listarTipoDatoOficial(idUsuario)
-        select_tipo_dato_oficial.DataTextField = "tipodato"
-        select_tipo_dato_oficial.DataValueField = "id_tipodato"
+        select_tipo_dato_oficial.DataSource = Business.Protocolo.listarTipoDatoOficial(1)
+        select_tipo_dato_oficial.DataTextField = "nombre_tipo_dato_oficial"
+        select_tipo_dato_oficial.DataValueField = "id_tipo_dato_oficial"
         select_tipo_dato_oficial.DataBind()
+
+        Dim idTipoDatoOficial As Int32 = Convert.ToInt64(select_tipo_dato_oficial.SelectedItem.Value)
+
+        select_inicio.DataSource = Business.Protocolo.listarFechasInicio(idTipoDatoOficial)
+        select_inicio.DataTextField = "fecha_inicio"
+        select_inicio.DataValueField = "id_fecha_inicio"
+        select_inicio.DataBind()
+
+        select_mes.DataSource = Business.Protocolo.listarFechasCierre(idTipoDatoOficial)
+        select_mes.DataTextField = "fecha_cierre"
+        select_mes.DataValueField = "id_fecha_cierre"
+        select_mes.DataBind()
     End Sub
 
     Private Sub carga_combo()
@@ -745,5 +841,19 @@ Partial Class CargaArchivo
     'Recarga la tabla con el Historial de Carga.
     Protected Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
         carga_Tabla()
+    End Sub
+
+    Protected Sub select_tipo_dato_oficial_SelectedIndexChanged(sender As Object, e As EventArgs) Handles select_tipo_dato_oficial.SelectedIndexChanged
+        Dim idTipoDatoOficial As Int32 = Convert.ToInt64(select_tipo_dato_oficial.SelectedItem.Value)
+
+        select_inicio.DataSource = Business.Protocolo.listarFechasInicio(idTipoDatoOficial)
+        select_inicio.DataTextField = "fecha_inicio"
+        select_inicio.DataValueField = "id_fecha_inicio"
+        select_inicio.DataBind()
+
+        select_mes.DataSource = Business.Protocolo.listarFechasCierre(idTipoDatoOficial)
+        select_mes.DataTextField = "fecha_cierre"
+        select_mes.DataValueField = "id_fecha_cierre"
+        select_mes.DataBind()
     End Sub
 End Class

@@ -7,7 +7,7 @@ Partial Class General_Default
         Session.Add("IdUsuario", 8413)
         Session.Add("Perfil", 140)
         Session.Add("NombrePerfil", "Administrador Protocolo Dipres")
-        Session.Add("Clave", "")
+        Session.Add("Clave", "clave")
         Response.Redirect("CargaArchivo.aspx")
     End Sub
 End Class

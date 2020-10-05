@@ -367,4 +367,14 @@ Public NotInheritable Class Protocolo
     Public Shared Function listarTipoDatoOficial(ByVal idUsuario As Int32) As DataTable
         Return Data.Protocolo.listarTipoDatosOficiales(idUsuario)
     End Function
+
+    'Retorna las fechas de inicio para un tipo de tado oficial
+    Public Shared Function listarFechasInicio(ByVal idTipoDatoOficial As Int32) As DataTable
+        Return Data.Protocolo.listarFechasInicio(idTipoDatoOficial)
+    End Function
+
+    'Retorna las fechas de cierre para un tipo de tado oficial
+    Public Shared Function listarFechasCierre(ByVal idTipoDatoOficial As Int32) As DataTable
+        Return Data.Protocolo.listarFechasCierre(idTipoDatoOficial)
+    End Function
 End Class
